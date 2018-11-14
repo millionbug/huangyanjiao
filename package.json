@@ -1,0 +1,17 @@
+{
+  "name": "webpack1109",
+  "version": "1.0.0",
+  "description": "11／09日的学习webpack，1.对webpack配置的熟悉。2.学习webpack的插件。3.配置vue",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}
