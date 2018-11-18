@@ -4,13 +4,25 @@
   "description": "11／09日的学习webpack，1.对webpack配置的熟悉。2.学习webpack的插件。3.配置vue",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack && webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.0",
+    "babel-preset-env": "^1.7.0",
+    "css": "^2.2.4",
+    "css-loader": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.11",
+    "superagent": "^4.0.0-beta.5",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "vue-template-loader": "^1.0.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   }

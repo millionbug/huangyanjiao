@@ -1,9 +1,24 @@
 let path = require('path');
+let vueloaderplugin = require('vue-loader/lib/plugin');
 let htmlwebpackplugin = require('html-webpack-plugin');
 let htmlwebpackpluginconfig = { //对html-webpack-plugin插件的配置，指定一个模版html文件
   title: 'hello, 这是htmlwebpackplugin自动生成的html文件',
   filename: 'index.html',
-  template: './dist/template.html',
+  templateContent() {
+    return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>hello, 这是htmlwebpackplugin自动生成的html文件</title>
+      </head>
+      <body>
+        <div id="app"></div>
+      </body>
+    </html>
+    `
+  },
+  // template: './dist/template.html',
   inject: true,
 }
 module.exports = {
@@ -27,9 +42,49 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
-    inline: true
+    inline: true,
+    port: 8082,
+    proxy: {
+      '/api': {
+        // target: 'localhost:3000',
+        // target: 'http:127.0.0.1:8888',
+        target: 'http://ba8.fe.dev.sankuai.com',
+        // pathRewrite: {'^/api': '/api/v1'},
+        changeOrigin: true,
+        // secure: false
+      },
+      // "/api/RoomApi/game": {
+      //   "target": "http://open.douyucdn.cn",
+      //   "changeOrigin":true
+      // },
+      
+    }
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
+  module: {
+    rules: [{
+      test: /\.vue$/,
+      loader: 'vue-loader'
+    }, {
+      test: /\.js$/,
+      loader: 'babel-loader'
+    }, {
+      test: /\.css$/,
+      use: [
+        'vue-style-loader',
+        'css-loader'
+      ]
+    }, {
+      test: /\.html$/,
+      use: 'vue-template-loader'
+    }]
   },
   plugins: [
-    new htmlwebpackplugin(htmlwebpackpluginconfig)
+    new htmlwebpackplugin(htmlwebpackpluginconfig),
+    new vueloaderplugin()
   ]
 }
