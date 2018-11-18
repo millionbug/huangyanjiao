@@ -1,5 +1,9 @@
 <template>
-  <div class="vue">这是个App的div</div>
+  <div class="google">
+    <div class="top-right-bar">
+      yangsir_v@qq.com
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +20,22 @@ export default {
 </script>
 
 <style>
-.vue {
-  color: green;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  color: #333;
+}
+html {
+  background: #fff;
+}
+.google {
+  height: 100vh;
+}
+.google .top-right-bar {
+  font-size: 20px;
+  margin: 10px 10px 0 0;
+  float: right;
 }
 </style>

@@ -76,6 +76,10 @@ class Application {
    */
   responseBody (ctx) {
     let content = ctx.body
+    let {type} = ctx
+    if (type === 'html') {
+      ctx.res.setHeader("Content-Type","text/html;charset='utf-8'")
+    }
     if (typeof content === 'string') {
       ctx.res.end(content)
     } else if (typeof content === 'object') {

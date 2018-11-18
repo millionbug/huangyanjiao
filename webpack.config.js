@@ -44,13 +44,17 @@ module.exports = {
     inline: true,
     port: 8082,
     proxy: {
-      '/api': {
+      '/api/*': {
         // target: 'localhost:3000',
-        // target: 'http:127.0.0.1:8888',
-        target: 'http://ba8.fe.dev.sankuai.com',
+        target: 'http://cfe.fe.dev.sankuai.com',
         // pathRewrite: {'^/api': '/api/v1'},
         changeOrigin: true,
-        // secure: false
+      },
+      '/blog/*': {
+        // target: 'localhost:3000',
+        target: 'http://cfe.fe.dev.sankuai.com',
+        // pathRewrite: {'^/api': '/api/v1'},
+        changeOrigin: true,
       },
       // "/api/RoomApi/game": {
       //   "target": "http://open.douyucdn.cn",

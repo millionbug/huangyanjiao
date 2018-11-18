@@ -25,22 +25,18 @@ class Router {
     this.handle = {}
   }
   use(path, controller, middlewares) {
-    let pathReagexpResult = pathRegexp(path)
-    this.routes.push(pathReagexpResult)
+    /**我不会正则，简化路由的匹配这段代码需要修改匹配方法 */
     let handleFunc = []
     if (middlewares) handleFunc = handleFunc.concat(middlewares)
     if (controller) handleFunc = handleFunc.concat(controller)
     let controllerMix = compose(handleFunc)
-    this.handle[pathReagexpResult] = {
-      path, controller: controllerMix
-    }
+    this.handle[path] = controllerMix
+    console.log(typeof this.handle[path])
   }
   match(path) {
-    for (let i = 0, len = this.routes.length; i < len; i++) {
-      if (this.routes[i].exec(path)) {
-        return this.handle[this.routes[i]]
-      }
-    }
+    /**我不会正则，简化匹配方案 */
+    path = path.slice(0, path.indexOf('?'))
+    return this.handle[path]
   }
   routeMiddle() {
     let route = this
@@ -48,8 +44,7 @@ class Router {
       let path = ctx.path
       let matchedHandle = route.match(path)
       if (!matchedHandle) return
-      // ctx.body = matchedHandle['controller'].toString()
-      await matchedHandle['controller'](ctx)
+      await matchedHandle(ctx)
       next()
     }
   }
