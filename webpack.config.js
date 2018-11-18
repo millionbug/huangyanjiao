@@ -18,7 +18,6 @@ let htmlwebpackpluginconfig = { //对html-webpack-plugin插件的配置，指定
     </html>
     `
   },
-  // template: './dist/template.html',
   inject: true,
 }
 module.exports = {

@@ -1,4 +1,3 @@
-// //koa自己实现
 // let {Application} = require('./module/app');
 // let Router = require('./module/router');
 
