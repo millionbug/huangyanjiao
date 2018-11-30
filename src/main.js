@@ -1,11 +1,18 @@
 import Vue from 'vue';
-import App from './client/App.vue';
+import Router from 'vue-router';
+import routes from './client/router.js';
+
+Vue.use(Router)
+
+let router = new Router({
+  routes
+})
 new Vue({
   el: '#app',
-  components: {
-    'app': App
-  },
-  template: `<app />`
+  router,
+  template: `<div>
+    <router-view></router-view>
+  </div>`
 })
 
 

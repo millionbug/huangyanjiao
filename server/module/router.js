@@ -31,11 +31,15 @@ class Router {
     if (controller) handleFunc = handleFunc.concat(controller)
     let controllerMix = compose(handleFunc)
     this.handle[path] = controllerMix
-    console.log(typeof this.handle[path])
   }
   match(path) {
     /**我不会正则，简化匹配方案 */
-    path = path.slice(0, path.indexOf('?'))
+    if (this.handle[path]) return this.handle[path]
+    let index;
+    if (path.indexOf('?') > 0) {
+      index = path.indexOf('?')
+    }
+    path = path.slice(0, index)
     return this.handle[path]
   }
   routeMiddle() {
@@ -43,7 +47,11 @@ class Router {
     return async function (ctx, next) {
       let path = ctx.path
       let matchedHandle = route.match(path)
-      if (!matchedHandle) return
+      if (!matchedHandle) {
+        console.log(route.handle)
+        console.log(path, 'note matched👋')
+        return
+      }
       await matchedHandle(ctx)
       next()
     }

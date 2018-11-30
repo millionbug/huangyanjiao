@@ -1,3 +1,10 @@
+// const path = requrie('path')
+// const webpack = require('webpack')
+// const merge = require('webpack-merge')
+// const nodeExternals = require('webpack-node-externals')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const webpack = require('webpack')
+
 let path = require('path');
 let vueloaderplugin = require('vue-loader/lib/plugin');
 let htmlwebpackplugin = require('html-webpack-plugin');
@@ -34,37 +41,14 @@ module.exports = {
   // 下面这个entry最终的位置是 项目根目录/today/wang/app/entry.js
   // 前面./不能少，后面的.js可以省略，也可以写
   // 以下演示三种entry，实际中取一种就行
-  entry: './src/main',
+  entry: './server/render/blog.js',
+  target: 'node',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: './[hash]index.js',
-    hashDigestLength: 8
+    path: process.cwd() + '/server/render/webpackOutPut',
+    filename: 'serverRenderBlog.js',
+    libraryTarget: 'commonjs2'
   },
   devtool: 'eval-source-map',
-  devServer: {
-    contentBase: path.resolve(__dirname, './dist'),
-    inline: true,
-    port: 8082,
-    proxy: {
-      '/api/*': {
-        // target: 'localhost:3000',
-        target: 'http://344.fe.dev.sankuai.com/',
-        // pathRewrite: {'^/api': '/api/v1'},
-        changeOrigin: true,
-      },
-      '/blog/*': {
-        // target: 'localhost:3000',
-        target: 'http://cfe.fe.dev.sankuai.com',
-        // pathRewrite: {'^/api': '/api/v1'},
-        changeOrigin: true,
-      },
-      // "/api/RoomApi/game": {
-      //   "target": "http://open.douyucdn.cn",
-      //   "changeOrigin":true
-      // },
-      
-    }
-  },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
@@ -95,7 +79,12 @@ module.exports = {
     }]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"server"'
+    }),
+    new VueSSRServerPlugin(),
     new htmlwebpackplugin(htmlwebpackpluginconfig),
-    new vueloaderplugin()
+    new vueloaderplugin(),
   ]
 }
