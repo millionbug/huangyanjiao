@@ -1,10 +1,16 @@
 <template>
 <div id="app" class="blog">
   <div class="header">
-    <img src="../../img/banner.jpg" />
+    <img src="/img/banner.jpg" />
   </div>
   <div class="footer">
-    
+    <a 
+      :key="index"
+      v-for="(item, index) in composition" class="blog-title"
+      :href="`/blog/detail?id=${item.id}`"
+    >
+      {{item.title}}
+    </a>
   </div>
 </div>
 </template>
@@ -40,5 +46,8 @@ export default {
 .header img {
   height: 100%;
   width: 100%;
+}
+.footer {
+  text-align: center;
 }
 </style>

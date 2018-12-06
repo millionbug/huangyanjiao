@@ -1,3 +1,4 @@
+let fs = require('fs')
 let proto = {}
 
 function delegateSetter (property, name) {
@@ -29,5 +30,18 @@ responseGetter.forEach(val => {
 responseSetter.forEach(val => {
   delegateSetter('response', val)
 })
+
+proto.redirect = function (url) {
+  this.type = 'html'
+  this.body = `
+    Redirecting to <a id="redirect" href="${url}">${url}'</a>.
+    <script>document.getElementById('redirect').click()</script>
+  `
+}
+
+proto.render = function (url) {
+  this.type = 'html'
+  this.body = fs.readFileSync(process.cwd() + url).toString()
+}
 
 module.exports = proto

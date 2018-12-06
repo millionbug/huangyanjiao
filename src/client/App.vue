@@ -1,7 +1,7 @@
 <template>
   <div class="google">
     <div class="top-right-bar">
-      yangsir_v<img src="../../img/ate.jpg" />qq.com
+      yangsir_v<img src="/img/ate.jpg" />qq.com
     </div>
     <div class="menu">
       <div class="menu-list" @click="goToBlog">

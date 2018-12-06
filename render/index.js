@@ -7,7 +7,7 @@ module.exports = function (html) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./index.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/renderStatic/index.css" />
   </head>
   <body>
     <div id="app" class="blog">
@@ -17,7 +17,7 @@ module.exports = function (html) {
         ${html}
       </div>
     </div>
-    <script src="./webpackOutPut/serverRenderBlog.js"></script>
+    <script src="/renderStatic/webpackOutPut/serverRenderBlog.js"></script>
   </body>
   </html>
   `

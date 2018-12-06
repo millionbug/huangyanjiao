@@ -41,11 +41,11 @@ module.exports = {
   // 下面这个entry最终的位置是 项目根目录/today/wang/app/entry.js
   // 前面./不能少，后面的.js可以省略，也可以写
   // 以下演示三种entry，实际中取一种就行
-  entry: './server/render/blog.js',
+  entry: './serverRender/main.js',
   target: 'node',
   output: {
-    path: process.cwd() + '/server/render/webpackOutPut',
-    filename: 'serverRenderBlog.js',
+    path: process.cwd() + '/serverRenderStatic',
+    filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
   devtool: 'eval-source-map',
@@ -69,7 +69,7 @@ module.exports = {
       ]
     }, {
       test: /\.html$/,
-      use: 'vue-template-loader'
+      use: 'vue-template-compiler'
     }, {
       test: /\.(png|jpg|gif)$/,
       use: [{

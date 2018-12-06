@@ -14,14 +14,20 @@ let mime = {
  "txt": "text/plain",
 }
 let mimeType = Object.keys(mime)
-module.exports = async (ctx, next) => {
-  let type = mimeType.find(type => ctx.req.url.indexOf('.' + type) > 0)
-  if (type) {
-    let stream = fs.createReadStream(process.cwd() + ctx.req.url)
-    ctx.res.setHeader("Content-Type", mime[type])
-    stream.on('error', err => console.log(err))
-    stream.pipe(ctx.res)
-  } else {
-    next()
+
+module.exports = function(path, dir) {
+  return async (ctx, next) => {
+    if (ctx.req.url.indexOf(path) === 0) {
+      console.log(ctx.req.url, path, '🌹')
+      let type = mimeType.find(type => ctx.req.url.indexOf('.' + type) > 0)
+      if (type) {
+        let stream = fs.createReadStream(process.cwd() + ctx.req.url)
+        ctx.res.setHeader("Content-Type", mime[type])
+        stream.on('error', err => console.log(err))
+        stream.pipe(ctx.res)
+      }
+    } else {
+      next()
+    }
   }
 }

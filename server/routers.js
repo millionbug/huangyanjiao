@@ -1,11 +1,18 @@
 let fs = require('fs');
 let Router = require('./module/router');
 let md = require('markdown-it')()
-let serverRender = require('./render/index.js')
+let serverRender = require('../render/index.js')
 
 let router = new Router;
 let routerArr = [{
-  url: '/server/render/blog',
+  url: '/',
+  async controller(ctx) {
+    let url = '/dist/index.html'
+    ctx.render(url)
+    return
+  }
+}, {
+  url: '/blog/detail',
   async controller(ctx, next) {
     let {id} = ctx.request.query;
     let mdString = fs.readFileSync(process.cwd() + `/blog/${id}.md`).toString()
@@ -16,17 +23,6 @@ let routerArr = [{
     next()
   }
 }, {
-  url: '/blog', 
-  async controller(ctx, next) {
-    let {id} = ctx.request.query
-    console.log(ctx.req.url, id, process.cwd() + `/blog/${id}.md`, 'request path=========')
-    let mdString = fs.readFileSync(process.cwd() + `/blog/${id}.md`).toString()
-    ctx.type = 'html'
-    console.log(ctx.type, 'ctx.type')
-    ctx.body = md.render(mdString)
-    next();
-  }
-}, {
   url: '/api/blogs/composition',
   async controller(ctx, next) {
     // let dir = fs.readdirSync(process.cwd() + '/blog');
@@ -35,14 +31,8 @@ let routerArr = [{
     //   return file.toString().slice(0, 200)
     // })
     let data = [{
-      title: '博文1',
-      date: 1543142472148
-    }, {
-      title: '博文2',
-      date: 1543142472148
-    }, {
-      title: '博文3',
-      date: 1543142472148
+      title: '一个web项目的构建vue + koa2 + webpack + node',
+      id: 'howtocreatewebapp'
     }]
     ctx.body = {
       code: 200,

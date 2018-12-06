@@ -37,7 +37,8 @@ module.exports = {
   entry: './src/main',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: './[hash]index.js',
+    // filename: './[hash]index.js',
+    filename: './index.js',
     hashDigestLength: 8
   },
   devtool: 'eval-source-map',
@@ -47,15 +48,7 @@ module.exports = {
     port: 8082,
     proxy: {
       '/api/*': {
-        // target: 'localhost:3000',
-        target: 'http://344.fe.dev.sankuai.com/',
-        // pathRewrite: {'^/api': '/api/v1'},
-        changeOrigin: true,
-      },
-      '/blog/*': {
-        // target: 'localhost:3000',
-        target: 'http://cfe.fe.dev.sankuai.com',
-        // pathRewrite: {'^/api': '/api/v1'},
+        target: 'http://localhost:3000', //http必须
         changeOrigin: true,
       },
       // "/api/RoomApi/game": {
@@ -81,12 +74,19 @@ module.exports = {
       test: /\.css$/,
       use: [
         'vue-style-loader',
-        'css-loader'
+        'css-loader',
+        'sass-loader'
       ]
-    }, {
+    },
+    //  {
+    //   test: /\.html$/,
+    //   use: 'vue-template-loader'
+    // },
+    {
       test: /\.html$/,
-      use: 'vue-template-loader'
-    }, {
+      use: 'vue-html-loader'
+    },
+     {
       test: /\.(png|jpg|gif)$/,
       use: [{
         loader: 'file-loader',
