@@ -15,6 +15,7 @@ let htmlwebpackpluginconfig = { //对html-webpack-plugin插件的配置，指定
       </head>
       <body>
         <div id="app"></div>
+        <script type="text/javascript" src="/dist/index.js"></script></body>
       </body>
     </html>
     `

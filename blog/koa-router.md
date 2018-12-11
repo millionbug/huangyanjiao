@@ -1,3 +1,9 @@
+# 路由中间件设计
+
+------
+```javascript
+//本来为了实现koa路由中的灵活匹配方式，以及路由的多样性，使用了非常//复杂的正则表达式规则来进行匹配路由，是参考的《深入浅出node》但是///有个bug我又不会，最后只好放弃了路由多样性，不过路由的设计还是保留//了。路由在koa的洋葱模型中，其实也是一个中间件，不过这个中间件是要
+//找到匹配当前请求的注册的controller并执行而已
 let compose = require('./app').compose
 let pathRegexp = function (path) {
   path = path
@@ -50,10 +56,7 @@ class Router {
       if (!matchedHandle) {
         console.log(route.handle)
         console.log(path, 'note matched👋')
-        return ctx.body = {
-          code: '404',
-          data: 'not found'
-        }
+        return
       }
       await matchedHandle(ctx)
       next()
@@ -62,3 +65,5 @@ class Router {
 }
 
 module.exports = Router
+
+```

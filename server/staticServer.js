@@ -25,9 +25,10 @@ module.exports = function(path, dir) {
         ctx.res.setHeader("Content-Type", mime[type])
         stream.on('error', err => console.log(err))
         stream.pipe(ctx.res)
+        return
       }
     } else {
-      next()
+      await next()
     }
   }
 }

@@ -33,6 +33,15 @@ let routerArr = [{
     let data = [{
       title: '一个web项目的构建vue + koa2 + webpack + node',
       id: 'howtocreatewebapp'
+    }, {
+      title: 'koa框架源码解析',
+      id: 'koa'
+    }, {
+      title: 'koa-router源码解析',
+      id: 'koa-router'
+    }, {
+      title: '静态资源服务中间件',
+      id: 'staticServerMiddleware'
     }]
     ctx.body = {
       code: 200,

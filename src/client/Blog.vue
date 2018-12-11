@@ -4,7 +4,8 @@
     <img src="/img/banner.jpg" />
   </div>
   <div class="footer">
-    <a 
+    <a
+      _blnk
       :key="index"
       v-for="(item, index) in composition" class="blog-title"
       :href="`/blog/detail?id=${item.id}`"
@@ -27,8 +28,10 @@ export default {
   },
   created() {
     superagent.get('/api/blogs/composition')
+      .set('Accept', 'application/json')
       .end((err, res) => {
         this.loading = false;
+        console.log(res.body)
         if (err || res.body && res.body.code !== 200) {
           this.loadError = true;
           return;
@@ -49,5 +52,10 @@ export default {
 }
 .footer {
   text-align: center;
+}
+.footer a {
+  font-size: 20px;
+  display: block;
+  margin-top: 20px;
 }
 </style>

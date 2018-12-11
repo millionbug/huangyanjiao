@@ -4,20 +4,36 @@ let response = require('./response')
 let context = require('./context')
 
 // 组合中间件
-function compose (middlewares) {
+// function compose (middlewares) {
+//   return async ctx => {
+//     function createNext (middleware, next) {
+//       return async function () {
+//         await middleware(ctx, next)
+//       }
+//     }
+//     let next = async _ => {
+//       return Promise.resolve()
+//     }
+//     for (let i = middlewares.length - 1; i >= 0; i--) {
+//       next = createNext(middlewares[i], next)
+//     }
+//     next()
+//   }
+// }
+
+function compose(middlewares) {
   return async ctx => {
-    function createNext (middleware, next) {
-      return async function () {
-        middleware(ctx, next)
-      }
-    }
     let next = async _ => {
       return Promise.resolve()
     }
-    for (let i = middlewares.length - 1; i >= 0; i--) {
-      next = createNext(middlewares[i], next)
+    for (let len = middlewares.length; len > 0; len--) {
+        next = function(next) {
+          return async function() {
+            return middlewares[len - 1](ctx, next)
+          }
+        }(next)
     }
-    next()
+    await next()
   }
 }
 
@@ -77,8 +93,13 @@ class Application {
   responseBody (ctx) {
     let content = ctx.body
     let {type} = ctx
+    if (!content) {
+      return
+    }
     if (type === 'html') {
       ctx.res.setHeader("Content-Type","text/html;charset='utf-8'")
+    } else {
+      ctx.res.setHeader("Content-Type","application/json;charset='utf-8'")
     }
     if (typeof content === 'string') {
       ctx.res.end(content)
