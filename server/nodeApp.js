@@ -7,6 +7,17 @@ app.use(staticServer('/dist', '/dist'))
 app.use(staticServer('/img', '/img'))
 app.use(staticServer('/renderStatic', '/renderStatic'))
 
+
+app.use(async (ctx, next) => {
+  let req = ctx.req;
+  let ip = req.headers['x-forwarded-for'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+  console.log(ip, '🚗🚗✈️✈️')
+  next();
+})
+
 app.use(routes)
 
 
