@@ -6,6 +6,8 @@
 
 启用3000端口监听静态资源请求与API请求没有跨域问题
 
+node端koa + koa-router + static-server都是我自己实现的，API有细微不同
+
 启动：
 1.先webpack编译
 2.node ./server/nodeApp.js
