@@ -6,11 +6,11 @@
 
 启用3000端口监听静态资源请求与API请求避免跨域问题
 
-node端koa + koa-router + static-server都是我自己实现的，API有细微不同
-koa:server/module/ 
-static-server: server/staticServer.js
-koa-router: server/module/router.js
+#node端koa + koa-router + static-server都是我自己实现的，API有细微不同
+# koa:server/module/ 
+# static-server: server/staticServer.js
+# koa-router: server/module/router.js
 
 启动：
-1.先webpack编译
-2.node ./server/nodeApp.js
+# 1.先webpack编译
+# 2.node ./server/nodeApp.js
