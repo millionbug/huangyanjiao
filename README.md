@@ -7,6 +7,7 @@
 启用3000端口监听静态资源请求与API请求避免跨域问题
 
 #node端koa + koa-router + static-server都是我自己实现的，API有细微不同
+#https://github.com/millionbug/huangyanjiao/tree/master/server/module
 # koa:server/module/ 
 # static-server: server/staticServer.js
 # koa-router: server/module/router.js
