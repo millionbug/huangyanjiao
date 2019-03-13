@@ -1,11 +1,16 @@
 let fs = require('fs');
-let Router = require('./module/router');
+let Router = require('../module/router.js');
 let md = require('markdown-it')()
-let serverRender = require('../render/index.js')
+let serverRender = require('../../render/index.js')
 
 let router = new Router;
 let routerArr = [{
-  url: '/',
+  url: [
+    '/',
+    '/blog',
+    '/game',
+    '/css'
+  ],
   async controller(ctx) {
     let url = '/dist/index.html'
     ctx.render(url)

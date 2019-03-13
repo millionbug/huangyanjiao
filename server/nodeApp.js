@@ -1,7 +1,7 @@
 let {Application} = require('./module/app')
-let routes = require('./routers.js')
+let routes = require('./controller/routers.js')
 let app = new Application()
-let staticServer = require('./staticServer.js')
+let staticServer = require('./module/staticServer.js')
 
 app.use(staticServer('/dist', '/dist'))
 app.use(staticServer('/img', '/img'))
@@ -21,4 +21,4 @@ app.use(async (ctx, next) => {
 app.use(routes)
 
 
-app.listen('3000', _ => console.log('running in localhost:3000'))
+app.listen('8081', _ => console.log('running in localhost:8081'))

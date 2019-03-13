@@ -30,6 +30,15 @@ class Router {
     if (middlewares) handleFunc = handleFunc.concat(middlewares)
     if (controller) handleFunc = handleFunc.concat(controller)
     let controllerMix = compose(handleFunc)
+    if (Array.isArray(path)) {
+      if (path.length === 0) {
+        throw new Error('path must be string or Array');
+      }
+      path.forEach(p => {
+        this.handle[p] = controllerMix
+      })
+      return;
+    }
     this.handle[path] = controllerMix
   }
   match(path) {

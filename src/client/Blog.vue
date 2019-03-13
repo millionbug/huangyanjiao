@@ -5,7 +5,7 @@
   </div>
   <div class="footer">
     <a
-      _blnk
+      target="_blank"
       :key="index"
       v-for="(item, index) in composition" class="blog-title"
       :href="`/blog/detail?id=${item.id}`"
