@@ -97,9 +97,9 @@ class Application {
       return
     }
     if (type === 'html') {
-      ctx.res.setHeader("Content-Type","text/html;charset='utf-8'")
+      ctx.res.setHeader("Content-Type","text/html;charset:utf-8")
     } else {
-      ctx.res.setHeader("Content-Type","application/json;charset='utf-8'")
+      ctx.res.setHeader("Content-Type","application/json;charset:utf-8")
     }
     if (typeof content === 'string') {
       ctx.res.end(content)
