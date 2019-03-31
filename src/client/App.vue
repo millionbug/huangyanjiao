@@ -1,14 +1,21 @@
 <template>
   <div class="google">
-    <div class="top-right-bar">
+    <div class="google-top-right-bar">
       yangsir_v<img src="/img/ate.jpg" />qq.com
     </div>
-    <div class="menu">
-      <div class="menu-list" @click="goToBlog">
+    <div class="google-menu">
+      <router-link tag="div" class="menu-list"
+        to="/blog"  
+      >
         博客
-      </div>
+      </router-link>
+      <router-link tag="div" class="menu-list"
+        to="/newblog"
+      >
+        前端学习总结
+      </router-link>
     </div>
-    <canvas class="background" />
+    <canvas class="google-background" />
   </div>
 </template>
 
@@ -24,10 +31,6 @@ export default {
       })
   },
   methods: {
-    goToBlog() {
-      this.$router.push('/blog')
-      // window.open('http://lijundong.com/headless-browser/')
-    }
   },
   mounted() {
     rainbow()
@@ -40,7 +43,6 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* font-size: 0; */
   color: #333;
 }
 html {
@@ -51,20 +53,20 @@ html {
   position: relative;
   overflow: hidden;
 }
-.google .top-right-bar {
+.google-top-right-bar {
   font-size: 20px;
   margin: 10px 10px 0 0;
   float: right;
   line-height: 20px;
   vertical-align: middle;
 }
-.google .top-right-bar img {
+.google-top-right-bar img {
   width: 20px;
   height: 20px;
   border-radius: 10px;
   vertical-align: middle;
 }
-.google .background {
+.google-background {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -72,17 +74,20 @@ html {
   top: 0;
   z-index: -1;
 }
-.google .menu {
+.google-menu {
   position: absolute;
   top: 30%;
   left: 50%;
   text-align: center;
 }
-.google .menu .menu-list {
-  display: inline-block;
+.google-menu .menu-list {
+  margin-top: 30px;
   margin-left: -50%;
   font-size: 24px;
   text-decoration-line: underline;
+}
+.menu-list:first {
+  margin-top: 0;
 }
 .menu-list:hover {
   transform: scale(1.1);

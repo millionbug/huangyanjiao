@@ -3,13 +3,21 @@ let Router = require('../module/router.js');
 let md = require('markdown-it')()
 let serverRender = require('../../render/index.js')
 
+function checkFileExist(filePath, ctx) {
+  if (!fs.existsSync(filePath)) {
+    ctx.code = 404;
+    throw filePath + '文件不存在';
+  }
+}
+
 let router = new Router;
 let routerArr = [{
   url: [
     '/',
     '/blog',
     '/game',
-    '/css'
+    '/css',
+    'newblog'
   ],
   async controller(ctx) {
     let url = '/dist/index.html'
@@ -17,15 +25,40 @@ let routerArr = [{
     return
   }
 }, {
+  url: '/api/blogsdir',
+  async controller(ctx, next) {
+    let dirObj = [];
+    let files = fs.readdirSync(process.cwd() + `/blog`);
+    files.forEach(file => {
+      let f = fs.readdirSync(process.cwd() + '/blog/' + file);
+      dirObj.push({
+        category: file,
+        list: f
+      })
+    })
+    ctx.type = 'json';
+    ctx.body = dirObj;
+  }
+}, {
   url: '/blog/detail',
   async controller(ctx, next) {
-    let {id} = ctx.request.query;
-    let mdString = fs.readFileSync(process.cwd() + `/blog/${id}.md`).toString()
+    let {id, category} = ctx.request.query;
+    let mdString = fs.readFileSync(process.cwd() + `/blog/${category}/${id}`).toString()
     let htmlString = md.render(mdString)
     htmlString = serverRender(htmlString)
     ctx.type = 'html'
     ctx.body = htmlString
     next()
+  }
+}, {
+  url: '/api/blogs/single',
+  async controller(ctx, next) {
+    let {id, category} = ctx.request.query;
+    let filePath = process.cwd() + `/blog/${category}/${id}`;
+    checkFileExist(filePath, ctx);
+    let str = fs.readFileSync(filePath).toString()
+    ctx.type = 'text'
+    ctx.body = str
   }
 }, {
   url: '/api/blogs/composition',

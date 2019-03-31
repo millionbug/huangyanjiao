@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script>
+    //寄生组合式继承
+    function SuperType(name) {
+      this.name = name;
+    }
+    function SubType(id) {
+      SuperType.call(this)
+      this.id = id;
+    }
+    function inherit(SuperType, SubType) {
+      let fn = function() {};
+      fn.prototype = SuperType.prototype;
+      let obj = new fn();
+      SubType.prototype = obj;
+      // SubType.prototype.constructor = SubType;
+    }
+  </script>
+<body>
+
+</body>
+</html>

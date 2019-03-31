@@ -64,8 +64,7 @@ class Router {
           data: 'not found'
         }
       }
-      await matchedHandle(ctx)
-      next()
+      await matchedHandle(ctx, next)
     }
   }
 }

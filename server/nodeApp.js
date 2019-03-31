@@ -15,10 +15,10 @@ app.use(async (ctx, next) => {
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress;
   console.log(ip, '🚗🚗✈️✈️')
-  next();
+  await next();
 })
 
 app.use(routes)
 
 
-app.listen('8080', _ => console.log('running in localhost:8080'))
+app.listen('80', _ => console.log('running in localhost:80'))

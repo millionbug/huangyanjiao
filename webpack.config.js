@@ -15,7 +15,8 @@ let htmlwebpackpluginconfig = { //对html-webpack-plugin插件的配置，指定
       </head>
       <body>
         <div id="app"></div>
-        <script type="text/javascript" src="/dist/index.js"></script></body>
+        <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  
+        <script type="text/javascript" src="/dist/index.js"></script>
       </body>
     </html>
     `
@@ -46,9 +47,14 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
     inline: true,
+    historyApiFallback: true,
     port: 8082,
     proxy: {
       '/api/*': {
+        target: 'http://localhost:3000', //http必须
+        changeOrigin: true,
+      },
+      '/img/*': {
         target: 'http://localhost:3000', //http必须
         changeOrigin: true,
       },
@@ -72,7 +78,7 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader'
     }, {
-      test: /\.css$/,
+      test: /\.(scss|css)$/,
       use: [
         'vue-style-loader',
         'css-loader',
