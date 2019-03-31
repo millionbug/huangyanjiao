@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import routes from './client/router.js';
-import highlight from 'highlight.js';
+import hljs from 'highlight.js';
 
 Vue.directive('highlight',function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block)=>{
-    highlight.highlightBlock(block)
+    hljs.highlightBlock(block)
   })
 })
 Vue.use(Router)

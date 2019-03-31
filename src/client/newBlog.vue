@@ -14,11 +14,11 @@
 import asideBar from './asideBar.vue';
 import pageHeader from './pageHeader.vue';
 import myMarked from 'marked';
-import highlight from 'highlight.js';
+import hljs from 'highlight.js';
 myMarked.setOptions({
   renderer: new myMarked.Renderer(),
-  highlight: function(code) {
-    highlight.highlightAuto(code).value;
+  hljs: function(code) {
+    hljs.highlightAuto(code).value;
   },
   pedantic: false,
   gfm: true,

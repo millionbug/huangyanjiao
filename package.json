@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rm -rf dist && webpack && webpack-dev-server",
-    "server": "supervisor server/nodeApp.js"
+    "dev": "rm -rf dev && webpack && webpack-dev-server",
+    "server": "supervisor server/nodeApp.js",
+    "build": "rm -rf prod && webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",

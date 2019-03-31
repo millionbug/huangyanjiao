@@ -3,7 +3,8 @@ let routes = require('./controller/routers.js')
 let app = new Application()
 let staticServer = require('./module/staticServer.js')
 
-app.use(staticServer('/dist', '/dist'))
+app.use(staticServer('/dev', '/dev'))
+app.use(staticServer('/prod', '/prod'))
 app.use(staticServer('/img', '/img'))
 app.use(staticServer('/renderStatic', '/renderStatic'))
 
@@ -21,4 +22,4 @@ app.use(async (ctx, next) => {
 app.use(routes)
 
 
-app.listen('80', _ => console.log('running in localhost:80'))
+app.listen('3000', _ => console.log('running in localhost:3000'))

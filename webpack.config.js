@@ -16,7 +16,7 @@ let htmlwebpackpluginconfig = { //对html-webpack-plugin插件的配置，指定
       <body>
         <div id="app"></div>
         <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  
-        <script type="text/javascript" src="/dist/index.js"></script>
+        <script type="text/javascript" src="/dev/index.js"></script>
       </body>
     </html>
     `
@@ -38,14 +38,14 @@ module.exports = {
   // 以下演示三种entry，实际中取一种就行
   entry: './src/main',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './dev'),
     // filename: './[hash]index.js',
     filename: './index.js',
     hashDigestLength: 8
   },
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, './dist'),
+    contentBase: path.resolve(__dirname, './dev'),
     inline: true,
     historyApiFallback: true,
     port: 8082,

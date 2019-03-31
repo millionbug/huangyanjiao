@@ -20,7 +20,8 @@ let routerArr = [{
     '/newblog'
   ],
   async controller(ctx) {
-    let url = '/dist/index.html'
+    // let url = '/dist/index.html'
+    let url = '/prod/index.html'
     ctx.render(url)
     return
   }
