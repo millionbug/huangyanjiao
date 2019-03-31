@@ -5,11 +5,6 @@
     </div>
     <div class="google-menu">
       <router-link tag="div" class="menu-list"
-        to="/blog"  
-      >
-        博客
-      </router-link>
-      <router-link tag="div" class="menu-list"
         to="/newblog"
       >
         前端学习总结
