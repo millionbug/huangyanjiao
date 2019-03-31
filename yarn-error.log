@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/yangsir/.nvm/versions/node/v8.12.0/bin/node /Users/yangsir/.yarn/bin/yarn.js add marked
+  /Users/yangsir/.nvm/versions/node/v8.12.0/bin/node /Users/yangsir/.yarn/bin/yarn.js add pm2
 
 PATH: 
   /Users/yangsir/.nvm/versions/node/v8.12.0/bin:/Users/yangsir/.yarn/bin:/Users/yangsir/.config/yarn/global/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/Applications/Wireshark.app/Contents/MacOS
@@ -51,6 +51,8 @@ npm manifest:
       "webpack-merge": "^4.1.4"
     },
     "dependencies": {
+      "highlight.js": "^9.15.6",
+      "marked": "^0.6.1",
       "nodemon": "^1.18.9"
     }
   }
@@ -185,12 +187,6 @@ Lockfile:
     dependencies:
       delegates "^1.0.0"
       readable-stream "^2.0.6"
-  
-  argparse@^1.0.7:
-    version "1.0.10"
-    resolved "http://registry.npm.taobao.org/argparse/download/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
-    dependencies:
-      sprintf-js "~1.0.2"
   
   arr-diff@^2.0.0:
     version "2.0.0"
@@ -2413,6 +2409,10 @@ Lockfile:
       no-case "^2.2.0"
       upper-case "^1.1.3"
   
+  highlight.js@^9.15.6:
+    version "9.15.6"
+    resolved "http://registry.npm.taobao.org/highlight.js/download/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
+  
   hmac-drbg@^1.0.0:
     version "1.0.1"
     resolved "http://registry.npm.taobao.org/hmac-drbg/download/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -3024,12 +3024,6 @@ Lockfile:
     dependencies:
       invert-kv "^1.0.0"
   
-  linkify-it@^2.0.0:
-    version "2.0.3"
-    resolved "http://registry.npm.taobao.org/linkify-it/download/linkify-it-2.0.3.tgz#d94a4648f9b1c179d64fa97291268bdb6ce9434f"
-    dependencies:
-      uc.micro "^1.0.1"
-  
   load-json-file@^1.0.0:
     version "1.1.0"
     resolved "http://registry.npm.taobao.org/load-json-file/download/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -3184,15 +3178,9 @@ Lockfile:
     dependencies:
       object-visit "^1.0.0"
   
-  markdown-it@^8.4.2:
-    version "8.4.2"
-    resolved "http://registry.npm.taobao.org/markdown-it/download/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
-    dependencies:
-      argparse "^1.0.7"
-      entities "~1.1.1"
-      linkify-it "^2.0.0"
-      mdurl "^1.0.1"
-      uc.micro "^1.0.5"
+  marked@^0.6.1:
+    version "0.6.1"
+    resolved "http://registry.npm.taobao.org/marked/download/marked-0.6.1.tgz#a63addde477bca9613028de4b2bc3629e53a0562"
   
   math-random@^1.0.1:
     version "1.0.1"
@@ -3205,10 +3193,6 @@ Lockfile:
       hash-base "^3.0.0"
       inherits "^2.0.1"
       safe-buffer "^5.1.2"
-  
-  mdurl@^1.0.1:
-    version "1.0.1"
-    resolved "http://registry.npm.taobao.org/mdurl/download/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
   
   media-typer@0.3.0:
     version "0.3.0"
@@ -4706,10 +4690,6 @@ Lockfile:
     dependencies:
       extend-shallow "^3.0.0"
   
-  sprintf-js@~1.0.2:
-    version "1.0.3"
-    resolved "http://registry.npm.taobao.org/sprintf-js/download/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
-  
   sshpk@^1.7.0:
     version "1.15.2"
     resolved "http://registry.npm.taobao.org/sshpk/download/sshpk-1.15.2.tgz#c946d6bd9b1a39d0e8635763f5242d6ed6dcb629"
@@ -4836,10 +4816,6 @@ Lockfile:
       mime "^2.0.3"
       qs "^6.5.1"
       readable-stream "^3.0.3"
-  
-  supervisor@^0.12.0:
-    version "0.12.0"
-    resolved "http://registry.npm.taobao.org/supervisor/download/supervisor-0.12.0.tgz#de7e6337015b291851c10f3538c4a7f04917ecc1"
   
   supports-color@^2.0.0:
     version "2.0.0"
@@ -5008,10 +4984,6 @@ Lockfile:
     dependencies:
       media-typer "0.3.0"
       mime-types "~2.1.18"
-  
-  uc.micro@^1.0.1, uc.micro@^1.0.5:
-    version "1.0.5"
-    resolved "http://registry.npm.taobao.org/uc.micro/download/uc.micro-1.0.5.tgz#0c65f15f815aa08b560a61ce8b4db7ffc3f45376"
   
   uglify-js@2.6.x:
     version "2.6.4"
@@ -5552,4 +5524,4 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/yangsir/Desktop/blog/webpack1109/node_modules/.bin/acorn'
+  Error: EACCES: permission denied, mkdir '/Users/yangsir/Desktop/blog/webpack1109/node_modules/babel-register/node_modules/source-map-support'
