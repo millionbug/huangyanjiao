@@ -20,10 +20,14 @@ import rainbow from './plugin/rain-bow';
 
 export default {
   created() {
-    superagent.get('/api/webpackproxy')
-      .end((err, res) => {
+    console.log('crated')
+    // superagent.get('/api/redirect/test')
+    //   .end((err, res) => {
 
-      })
+    //   })
+    fetch('http://localhost:3000/api/redirect/test',{headers: {music: 'shadow'}})
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
   },
   methods: {
   },

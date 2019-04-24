@@ -76,7 +76,11 @@ module.exports = {
       loader: 'vue-loader'
     }, {
       test: /\.js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      exclude: /(node_mudules)/,
+      options: {
+        presets: ['es2015']
+     }
     }, {
       test: /\.(scss|css)$/,
       use: [

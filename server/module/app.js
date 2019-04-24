@@ -93,7 +93,12 @@ class Application {
   responseBody (ctx) {
     let content = ctx.body
     let {type} = ctx
-    if (!content) {
+    if (type === 'redirect') {
+      console.log(ctx.res._header)
+      let {redirectUrl} = ctx
+      ctx.res.writeHead(302, {'Location': redirectUrl || 'http://www.baidu.com/'});
+      console.log(ctx.res._header)
+      ctx.res.end();
       return
     }
     if (type === 'html') {

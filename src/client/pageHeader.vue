@@ -19,7 +19,7 @@ export default {
         link: 'https://github.com/millionbug/huangyanjiao',
       }, {
         name: 'mail',
-        link: 'yangsir_v@qq.com',
+        link: 'mailto:yangsir_v@qq.com',
       }, {
         name: 'weibo',
         link: 'https://weibo.com/6754511046/profile?rightmod=1&wvr=6&mod=personinfo'

@@ -19,11 +19,10 @@ let routerArr = [{
     '/css',
     '/newblog'
   ],
-  async controller(ctx) {
+  async controller(ctx, next) {
     // let url = '/dist/index.html'
     let url = '/prod/index.html'
     ctx.render(url)
-    return
   }
 }, {
   url: '/api/blogsdir',
@@ -86,6 +85,13 @@ let routerArr = [{
       code: 200,
       data
     }
+  }
+}, {
+  url: '/api/redirect/test',
+  async controller(ctx, next) {
+    console.log('🎩', ctx.req.method)
+    ctx.type = 'redirect';
+    ctx.redirectUrl = '';
   }
 }]
 routerArr.forEach(r => {
