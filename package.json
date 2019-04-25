@@ -8,7 +8,7 @@
     "dev": "rm -rf dev && webpack  && webpack-dev-server  ",
     "devserver": "cross-env NODE_ENV=development  nodemon server/nodeApp.js",
     "prodserver": "cross-env NODE_ENV=production  pm2 start server/nodeApp.js ",
-    "prod": "cross-env NODE_ENV=production rm -rf prod && webpack --config webpack.prod.js && pm2 start server/nodeApp.js"
+    "build": "rm -rf prod && webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
