@@ -58,8 +58,30 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+      options: {
+        appendTsSuffixTo: [/\.vue$/],
+      }
+    },
+    {
       test: /\.vue$/,
-      loader: 'vue-loader'
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          ts: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/]
+            }
+          }]
+        },
+        options: {
+          esModule: true
+        }
+      }
     }, {
       test: /\.js$/,
       loader: 'babel-loader',
