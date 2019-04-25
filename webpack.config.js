@@ -36,7 +36,7 @@ module.exports = {
   // 下面这个entry最终的位置是 项目根目录/today/wang/app/entry.js
   // 前面./不能少，后面的.js可以省略，也可以写
   // 以下演示三种entry，实际中取一种就行
-  entry: './src/main',
+  entry: './src/main.1.ts',
   output: {
     path: path.resolve(__dirname, './dev'),
     // filename: './[hash]index.js',
@@ -68,19 +68,44 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
-    }
+    },
+    extensions: ['.js', '.ts', '.json']
   },
   module: {
-    rules: [{
+    rules: [
+    {
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+      options: {
+        appendTsSuffixTo: [/\.vue$/],
+      }
+    },
+    {
       test: /\.vue$/,
-      loader: 'vue-loader'
-    }, {
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          ts: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/]
+            }
+          }]
+        },
+        options: {
+          esModule: true
+        }
+      }
+    },
+    {
       test: /\.js$/,
       loader: 'babel-loader',
       exclude: /(node_mudules)/,
       options: {
         presets: ['es2015']
-     }
+      }
     }, {
       test: /\.(scss|css)$/,
       use: [
@@ -89,10 +114,6 @@ module.exports = {
         'sass-loader'
       ]
     },
-    //  {
-    //   test: /\.html$/,
-    //   use: 'vue-template-loader'
-    // },
     {
       test: /\.html$/,
       use: 'vue-html-loader'

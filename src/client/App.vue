@@ -14,9 +14,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import superagent from 'superagent';
 import rainbow from './plugin/rain-bow';
+
+interface LabelledValue {
+  label: string;
+}
+
+function printLabel(labelledObj: LabelledValue) {
+  console.log(labelledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
 
 export default {
   created() {
@@ -37,7 +48,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
 * {
   box-sizing: border-box;
   margin: 0;
