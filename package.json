@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rm -rf dev && webpack && webpack-dev-server",
-    "server": "supervisor server/nodeApp.js",
-    "build": "rm -rf prod && webpack --config webpack.prod.js"
+    "dev": "rm -rf dev && webpack  && webpack-dev-server  ",
+    "devserver": "cross-env NODE_ENV=development  nodemon server/nodeApp.js",
+    "prodserver": "cross-env NODE_ENV=production  pm2 start server/nodeApp.js ",
+    "prod": "cross-env NODE_ENV=production rm -rf prod && webpack --config webpack.prod.js && pm2 start server/nodeApp.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.0",
     "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^5.2.0",
     "css": "^2.2.4",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",

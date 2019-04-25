@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/yangsir/.nvm/versions/node/v10.15.3/bin/node /Users/yangsir/.yarn/bin/yarn.js add tslint-loader --dev
+  /Users/yangsir/.nvm/versions/node/v10.15.3/bin/node /Users/yangsir/.yarn/bin/yarn.js add cross-env --dev
 
 PATH: 
   /Users/yangsir/.nvm/versions/node/v10.15.3/bin:/Users/yangsir/.yarn/bin:/Users/yangsir/.config/yarn/global/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/Applications/Wireshark.app/Contents/MacOS
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/yangsir/Desktop/blog/webpack1109/node_modules/@pm2/agent-node/node_modules/debug/CHANGELOG.md'
+  Error: EACCES: permission denied, mkdir '/Users/yangsir/Desktop/blog/webpack1109/node_modules/node-sass/node_modules/cross-spawn'
 
 npm manifest: 
   {
@@ -24,8 +24,9 @@ npm manifest:
     "private": true,
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "rm -rf dev && webpack && webpack-dev-server",
-      "server": "supervisor server/nodeApp.js",
+      "dev": "NODE_ENV=development && rm -rf dev && webpack && webpack-dev-server",
+      "dev-server": "NODE_ENV=development && webpack-dev-server && nodemon server/nodeApp.js",
+      "server": "NODE_ENV=development && nodemon server/nodeApp.js",
       "build": "rm -rf prod && webpack --config webpack.prod.js"
     },
     "author": "",
@@ -42,6 +43,7 @@ npm manifest:
       "node-sass": "^4.10.0",
       "sass-loader": "^7.1.0",
       "superagent": "^4.0.0-beta.5",
+      "tslint-loader": "^3.5.4",
       "vue": "^2.5.17",
       "vue-html-loader": "^1.2.4",
       "vue-loader": "^15.4.2",
@@ -4235,7 +4237,7 @@ Lockfile:
     version "0.9.0"
     resolved "http://registry.npm.taobao.org/oauth-sign/download/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   
-  object-assign@^4.0.1, object-assign@^4.1.0:
+  object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
     version "4.1.1"
     resolved "http://registry.npm.taobao.org/object-assign/download/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   
@@ -5182,7 +5184,7 @@ Lockfile:
     dependencies:
       glob "^7.0.5"
   
-  rimraf@2.6.3:
+  rimraf@2.6.3, rimraf@^2.4.4:
     version "2.6.3"
     resolved "http://registry.npm.taobao.org/rimraf/download/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
     dependencies:
@@ -5927,6 +5929,17 @@ Lockfile:
   tslib@1.9.3, tslib@^1.9.0:
     version "1.9.3"
     resolved "http://registry.npm.taobao.org/tslib/download/tslib-1.9.3.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+  
+  tslint-loader@^3.5.4:
+    version "3.5.4"
+    resolved "https://registry.npm.taobao.org/tslint-loader/download/tslint-loader-3.5.4.tgz#052af7f0772434451ea1b247bb55407f878a4c40"
+    integrity sha1-BSr38HckNEUeobJHu1VAf4eKTEA=
+    dependencies:
+      loader-utils "^1.0.2"
+      mkdirp "^0.5.1"
+      object-assign "^4.1.1"
+      rimraf "^2.4.4"
+      semver "^5.3.0"
   
   tty-browserify@0.0.0:
     version "0.0.0"

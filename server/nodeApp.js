@@ -2,6 +2,7 @@ let {Application} = require('./module/app')
 let routes = require('./controller/routers.js')
 let app = new Application()
 let staticServer = require('./module/staticServer.js')
+let port = '80'
 
 app.use(staticServer('/dev', '/dev'))
 app.use(staticServer('/prod', '/prod'))
@@ -20,6 +21,9 @@ app.use(async (ctx, next) => {
 })
 
 app.use(routes)
+console.log(process.env.NODE_ENV, '🐶')
+if (process.env.NODE_ENV === 'development') {
+  port = '3000'
+}
 
-
-app.listen('3000', _ => console.log('running in localhost:3000'))
+app.listen(port , _ => console.log('running in localhost:3000'))
