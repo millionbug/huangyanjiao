@@ -49,7 +49,7 @@ class Application {
   // 开启http请求并传入callback
   listen (...args) {
     let server = http.createServer(this.callback())
-    server.listen(...args)
+    return server.listen(...args)
   }
   // 挂载回调函数
   use (middleware) {

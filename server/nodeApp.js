@@ -1,8 +1,10 @@
 let {Application} = require('./module/app')
 let routes = require('./controller/routers.js')
-let app = new Application()
 let staticServer = require('./module/staticServer.js')
+let wsserver = require('./controller/wscontroller.js')
 let port = '80'
+
+let app = new Application()
 
 app.use(staticServer('/dev', '/dev'))
 app.use(staticServer('/prod', '/prod'))
@@ -26,4 +28,5 @@ if (process.env.NODE_ENV === 'development') {
   port = '3000'
 }
 
-app.listen(port , _ => console.log('running in localhost:3000'))
+let server = app.listen(port , _ => console.log('running in localhost:3000'))
+wsserver(server)

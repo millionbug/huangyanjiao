@@ -9,6 +9,11 @@
       >
         前端学习总结
       </router-link>
+      <router-link tag="div" class="menu-list"
+        to="/wsdemowhynot"
+      >
+        websoket-demo
+      </router-link>
     </div>
     <canvas class="google-background" />
   </div>
