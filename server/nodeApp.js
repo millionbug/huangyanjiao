@@ -23,10 +23,12 @@ app.use(async (ctx, next) => {
 })
 
 app.use(routes)
+//我晕，如果用pm2启动的话，会导致pm2和cross-env的参数混乱，这个时候node_env会失效，，，暂时不解决了
+//https://stackoverflow.com/questions/46561563/start-nodejs-app-that-use-cross-env-with-pm2
 console.log(process.env.NODE_ENV, '🐶')
 if (process.env.NODE_ENV === 'development') {
   port = '3000'
 }
 
-let server = app.listen(port , _ => console.log('running in localhost:3000'))
+let server = app.listen(port , _ => console.log('running in localhost:', port))
 wsserver(server)

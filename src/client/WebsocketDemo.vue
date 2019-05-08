@@ -12,6 +12,7 @@ export default {
     return {ttext: '',}
   },
   created() {
+    //设计个目录和路由怎么这么难啊
     let ws = new WebSocket("ws://localhost:3000");
     this._ws = ws;
     ws.onopen = function(evt) { 

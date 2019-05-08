@@ -17,7 +17,8 @@ let routerArr = [{
     '/blog',
     '/game',
     '/css',
-    '/newblog'
+    '/newblog',
+    '/wsdemowhynot'
   ],
   async controller(ctx, next) {
     // let url = '/dist/index.html'
