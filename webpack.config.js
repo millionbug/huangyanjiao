@@ -41,13 +41,14 @@ module.exports = {
     path: path.resolve(__dirname, './dev'),
     // filename: './[hash]index.js',
     filename: './index.js',
+    publicPath: '/',
     hashDigestLength: 8
   },
   devtool: 'eval-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, './dev'),
     inline: true,
-    historyApiFallback: true,
+    historyApiFallback: true, //注意深度嵌套路由无法成功匹配
     port: 8082,
     proxy: {
       '/api/*': {

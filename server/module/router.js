@@ -49,7 +49,13 @@ class Router {
       index = path.indexOf('?')
     }
     path = path.slice(0, index)
-    return this.handle[path]
+    let handle = this.handle[path]
+    if (!handle) {
+      if (path.indexOf('/newblog') === 0) {
+        handle = this.handle['/newblog']
+      }
+    }
+    return handle
   }
   routeMiddle() {
     let route = this

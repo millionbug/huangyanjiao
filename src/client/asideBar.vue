@@ -13,14 +13,14 @@
         </h1>
         <div
           class="bars-list-container bars-trans-animation"
-          :class="activeli === value.category && 'bars-list-container-active'"
+          :class="(activeli === value.category || rank) && 'bars-list-container-active'"
         >
           <h2
             v-for="l in value.list || []"
             class="bars-header bars-header-two"
-            :class="activeli === value.category && activeTwo === l && 'bars-header-two-active'"
-            :key="l"
-            @click="changeTwo(l)"
+            :class="activeTwo === value + l && 'bars-header-two-active'"
+            :key="value + l"
+            @click="changeTwo({category: value.category,  l})"
           >
             {{l}}
           </h2>
@@ -44,6 +44,10 @@ export default {
     value: {
       type: String || Number,
       default: '',
+    },
+    rank: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -59,7 +63,12 @@ export default {
       }
       this.$emit('selectCategory', index)
     },
-    changeTwo(l) {
+    changeTwo(obj) {
+      let {category, l} = obj;
+      console.log(obj)
+      if (category) {
+        this.changeOne(category)
+      }
       this.activeTwo = l;
       this.$emit('selectValue', l)
     }

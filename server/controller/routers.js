@@ -34,7 +34,9 @@ let routerArr = [{
       let f = fs.readdirSync(process.cwd() + '/blog/' + file);
       dirObj.push({
         category: file,
-        list: f
+        list: f.map(fileName => {
+          return fileName.slice(-3) === '.md' ? fileName.slice(0, -3) : fileName;
+        })
       })
     })
     ctx.type = 'json';
@@ -55,7 +57,7 @@ let routerArr = [{
   url: '/api/blogs/single',
   async controller(ctx, next) {
     let {id, category} = ctx.request.query;
-    let filePath = process.cwd() + `/blog/${category}/${id}`;
+    let filePath = process.cwd() + `/blog/${category}/${id}.md`;
     checkFileExist(filePath, ctx);
     let str = fs.readFileSync(filePath).toString()
     ctx.type = 'text'

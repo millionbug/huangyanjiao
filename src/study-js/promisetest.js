@@ -9,33 +9,54 @@ class Promise {
     this.resolveCallback = [];
     this.rejectCallback = [];
     try {
-      setTimeout(fn(this.resolve.bind(this), this.reject.bind(this)))
+      fn(this.resolve.bind(this), this.reject.bind(this))
     } catch(err) {
       // return new Promise((resolve, reject) => reject(err))
     }
   }
   then(resolve, reject) {
-    this.resolveCallback.push(resolve);
-    this.rejectCallback.push(reject);
-    return new Promise(function(res, rej) {
-      switch(this.status) {
-        case PENDING: ;break;
-        case RESOLVED: res(this.data);break;
-        case REJECT: rej(this.data);break;
-      }
+    
+    return new Promise((res, rej) => {
+      this.resolveCallback.push((value) => {
+        setTimeout(() => {
+          let x = res(resolve(value))      
+          if (x.then) {
+            x.then(res, rej)
+          }
+          
+        })
+      });
+      this.rejectCallback.push((value) => {
+        setTimeout(() => {
+          let x = rej(reject(value))
+          if (x.then) {
+            x.then(res, rej)
+          }
+        })
+      });
+      // switch(this.status) {
+      //   case PENDING: ;break;
+      //   case RESOLVED: res(this.data);break;
+      //   case REJECT: rej(this.data);break;
+      // }
     })
   }
   resolve(value) {
     this.status = RESOLVED;
     this.data = value;
     if (this.resolveCallback[0])
+    if (typeof this.data.then === 'function') {
+      this.data.then()
+    }
     this.resolveCallback[0](this.data)
   }
   reject(err) {
     this.status = REJECT;
     this.data = err;
-    if (this.rejectCallback[0])
-    this.rejectCallback[0](this.data)
+    setTimeout(() => {
+      if (this.rejectCallback[0])
+      this.rejectCallback[0](this.data)
+    })
   }
 }
 
@@ -50,7 +71,11 @@ new Promise((resolve, reject) => {
   return 4
 }).then(value => {
   console.log(value)
-  return 5
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res(5)
+    }, 0)
+  })
 }).then(value => {
   console.log(value)
 })

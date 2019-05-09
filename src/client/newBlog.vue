@@ -4,9 +4,10 @@
       <pageHeader title="blog" />
     </div>
     <div class="blog-bar-container">
-      <asideBar :barsData="dirList" @selectCategory="selectCategory" @selectValue="selectValue"/>
+      <asideBar :rank="true" :category="category" :value="value" :barsData="dirList" @selectCategory="selectCategory" @selectValue="selectValue"/>
     </div>
-    <div v-html="blogContent" class="blog-container" v-highlight></div>
+    <router-view :blogContent="blogContent"></router-view>
+    <!-- <div v-html="blogContent" class="blog-container" v-highlight></div> -->
   </div>
 </template>
 
@@ -45,7 +46,12 @@ export default {
   },
   created() {
     this.fetchDirList();
-    this.selectCategory();
+    let {category, value} = this.$route.params;
+    if (category && value) {
+      this.category = category;
+      this.value = value;
+      this.getContent();
+    }
   },
   methods: {
     fetchDirList() {
@@ -59,11 +65,16 @@ export default {
     selectCategory(category) {
       if (this.category === category) return;
       this.category = category;
+      this.$router.push('/newblog/' + category)
     },
     selectValue(value) {
       if (this.value === value) return;
       this.value = value;
-      fetch('/api/blogs/single?id=' + value + '&&' + 'category=' + this.category)
+      this.$router.push(`/newblog/${this.category}/${value}`)
+      this.getContent()
+    },
+    getContent() {
+      fetch('/api/blogs/single?id=' + this.value + '&&' + 'category=' + this.category)
       .then(response => {
         if (response.ok) {
           return response.text()
