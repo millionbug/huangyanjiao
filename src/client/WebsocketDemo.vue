@@ -1,6 +1,9 @@
 <template>
   <div id="nihao">
     <textarea @input="change" :value="ttext" class="wsdemo-container" id="tald-container" /> 
+    <img src="http://localhost:3000/api/cookie/test" />
+    <input v-model="inputText"/>
+    <input v-pmodel="privateText"/>
   </div>
 </template>
 
@@ -9,7 +12,23 @@ import throttle from '../tool/throttle.js';
 
 export default {
   data() {
-    return {ttext: '',}
+    return {
+      ttext: '',
+      inputText: '',
+      privateText: ''
+    }
+  },
+  directives: {
+    pmodel: {
+      bind() {
+        let {el} = arguments;
+        el.addEventListener('input', e => e)
+        console.log(...arguments)
+      },
+      update() {
+        // console.log(...arguments)
+      }
+    }
   },
   created() {
     //设计个目录和路由怎么这么难啊

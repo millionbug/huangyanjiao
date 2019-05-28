@@ -52,6 +52,9 @@ export default {
 html {
   background: #fff;
 }
+html, body {
+  height: 100%;
+}
 .google {
   height: 100vh;
   position: relative;

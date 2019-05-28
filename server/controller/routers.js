@@ -28,19 +28,35 @@ let routerArr = [{
 }, {
   url: '/api/blogsdir',
   async controller(ctx, next) {
-    let dirObj = [];
-    let files = fs.readdirSync(process.cwd() + `/blog`);
+    let dirList = [];
+    let modifyList = []
+    let Path = process.cwd();
+    let files = fs.readdirSync(Path + `/blog`);
     files.forEach(file => {
-      let f = fs.readdirSync(process.cwd() + '/blog/' + file);
-      dirObj.push({
+      let f = fs.readdirSync(Path + '/blog/' + file);
+      dirList.push({
         category: file,
         list: f.map(fileName => {
           return fileName.slice(-3) === '.md' ? fileName.slice(0, -3) : fileName;
         })
       })
+
+      let stats = f.map(fileName => {
+        return {
+          fileName: fileName.slice(-3) === '.md' ? fileName.slice(0, -3) : fileName,
+          ...fs.statSync(`${Path}/blog/${file}/${fileName}`)
+        }
+      })
+
+      modifyList = modifyList.concat(stats);
+
     })
+    modifyList.forEach(file => console.log(file.mtime + ','))
     ctx.type = 'json';
-    ctx.body = dirObj;
+    ctx.body = {
+      modifyList,
+      dirList
+    };
   }
 }, {
   url: '/blog/detail',
@@ -95,6 +111,34 @@ let routerArr = [{
     console.log('🎩', ctx.req.method)
     ctx.type = 'redirect';
     ctx.redirectUrl = '';
+  }
+}, {
+  url: '/api/cookie/test',
+  async controller(ctx, next) {
+    console.log(ctx.req.headers, '🍓')
+    ctx.body = {
+      code: 200,
+      data: 'cookie test'
+    }
+  }
+}, {
+  url: '/api/fsstate/test',
+  async controller(ctx, next) {
+    return new Promise(function(resolve, reject) {
+      fs.stat(process.cwd() + '/blog/' + 'javascript/koa.md', function(err, state) {
+        resolve(state)
+      })
+    }).then(state => {
+      ctx.body = {
+        code: 200,
+        data: state
+      }
+    })
+    let file = fs.state(process.cwd() + '/blog/' + 'javascript/koa.md')
+    ctx.body = {
+      code: 200,
+      data: file
+    }
   }
 }]
 routerArr.forEach(r => {
