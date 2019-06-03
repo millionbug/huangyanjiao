@@ -18,6 +18,7 @@ let routerArr = [{
     '/game',
     '/css',
     '/newblog',
+    '/ruler',
     '/wsdemowhynot'
   ],
   async controller(ctx, next) {

@@ -3,20 +3,26 @@ export default function throttle(fn, options) {
   let timere = timeout;
   let timer;
   let oldDate = new Date().valueOf();
-  if (first) {
-    fn();
-  }
-  function run() {
+  function run(e) {
     if (timer) {
       clearTimeout(timer)
     }
+    if (first) {
+      fn.call(this, e);
+      first = false;
+    }
     let newDate = new Date().valueOf();
     if ((newDate - oldDate) > timeout) {
-      fn();
+      fn.call(this, e);
       oldDate = newDate;
       timere = timeout;
+    } else {
+      timere = oldDate + timeout - newDate;
     }
-    timer = setTimeout(fn, timere);
+    let context = this;
+    timer = setTimeout(function() {
+      fn.call(context, e) //vue中非常重要，有点复杂执行上下文
+    }, timere);
   }
   
   return {

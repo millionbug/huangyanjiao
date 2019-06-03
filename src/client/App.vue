@@ -14,6 +14,11 @@
       >
         websoket-demo
       </router-link>
+      <router-link tag="div" class="menu-list"
+        to="/ruler"
+      >
+        ruler
+      </router-link>
     </div>
     <canvas class="google-background" />
   </div>
