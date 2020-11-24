@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "eslint": "^5.16.0",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.1.2",
     "markdown-it": "^8.4.2",
     "marked": "^0.6.1",
     "nodemon": "^1.18.10",
