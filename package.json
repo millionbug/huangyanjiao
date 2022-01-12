@@ -41,7 +41,7 @@
   "dependencies": {
     "eslint": "^5.16.0",
     "highlight.js": "^9.15.6",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^12.3.2",
     "marked": "^0.6.1",
     "nodemon": "^1.18.10",
     "pm2": "^3.5.0",
